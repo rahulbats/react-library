@@ -65,34 +65,37 @@ class App extends Component {
           <h1 className="App-title">Welcome to Library</h1>
           <h2 className="App-title">Click on the id for details of the book</h2>
         </header>
+        
+        <div style={{marginLeft:10+'%', marginRight:10+'%'}}>
+        {this.state.item == null?
+        <div>
         <p className="App-intro">
           Total Number of books: {this.state.count}, total checked out {this.state.checkedouts}
         </p>
-        <div style={{marginLeft:10+'%', marginRight:10+'%'}}>
-        {this.state.item == null?
         <Table  striped bordered condensed hover>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Checkout/Checkin</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            this.state.items.map(item=>{
-                return <tr key={item.id}>
-                          <td  style={{textAlign:'left'}}>
-                          <a href="#" onClick={()=>this.showItem(item.id)} >{item.id}</a>
-                          </td>
-                          <td style={{textAlign:'left'}}>{item.name}</td>
-                          <td>{item.out?<Button bsStyle="primary" onClick={()=>this.checkOutIn(item.id, false)}>CheckIn</Button>:<Button bsStyle="danger" onClick={()=>this.checkOutIn(item.id, true)}>CheckOut</Button>}</td>
-                        </tr>
-            })
-          }
-          
-          </tbody>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Checkout/Checkin</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              this.state.items.map(item=>{
+                  return <tr key={item.id}>
+                            <td  style={{textAlign:'left'}}>
+                            <a href="#" onClick={()=>this.showItem(item.id)} >{item.id}</a>
+                            </td>
+                            <td style={{textAlign:'left'}}>{item.name}</td>
+                            <td>{item.out?<Button bsStyle="primary" onClick={()=>this.checkOutIn(item.id, false)}>CheckIn</Button>:<Button bsStyle="danger" onClick={()=>this.checkOutIn(item.id, true)}>CheckOut</Button>}</td>
+                          </tr>
+              })
+            }
+            
+            </tbody>
         </Table>
+        </div>
         :
         <div>
           <h3><i className="fa fa-arrow-left text-success" onClick={()=>this.setState({item:null})} style={{cursor:'pointer'}} ></i> Book Detail</h3>
